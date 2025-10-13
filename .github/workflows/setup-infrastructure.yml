@@ -1,9 +1,6 @@
 name: Setup AWS Infrastructure
 
 on:
-  push:
-    branches: [master]
-    paths: ['backend/**']
   workflow_dispatch:
 
 jobs:

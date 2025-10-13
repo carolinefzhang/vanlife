@@ -41,6 +41,9 @@ jobs:
         aws lambda update-function-code \
           --function-name vanlife-api \
           --zip-file fileb://vanlife-lambda.zip
+
+        aws lambda wait function-updated \
+          --function-name vanlife-api
     
     - name: Update Lambda environment variables
       run: |
