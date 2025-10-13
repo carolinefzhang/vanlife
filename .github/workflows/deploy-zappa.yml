@@ -3,7 +3,7 @@ name: Deploy Django with Zappa
 on:
   push:
     branches: [master]
-    paths: ['backend/**']
+    paths: ['backend/**', '.github/workflows/deploy-zappa.yml']
   workflow_dispatch:
 
 jobs:
@@ -48,3 +48,9 @@ jobs:
         cd backend/Vanlife
         source venv/bin/activate
         zappa manage production migrate
+    
+    - name: Create superuser
+      run: |
+        cd backend/Vanlife
+        source venv/bin/activate
+        echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', ${{ secrets.ADMIN_EMAIL }}, ${{ secrets.ADMIN_PASSWORD }}) if not User.objects.filter(username='admin').exists() else None" | zappa manage production shell
