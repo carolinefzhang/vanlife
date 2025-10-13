@@ -1,5 +1,6 @@
+const apiUrl = import.meta.env.VITE_API_URL || "";
 export async function getVans() {
-    const response = await fetch("/api/vans");
+    const response = await fetch(`${apiUrl}/api/vans`);
     if (!response.ok) {
         throw {
             message: `Failed to fetch vans: ${response.status} ${response.statusText}`,
@@ -10,7 +11,7 @@ export async function getVans() {
 }
 
 export async function getVan(id: string) {
-    const response = await fetch(`/api/vans/${id}`);
+    const response = await fetch(`${apiUrl}/api/vans/${id}`);
     if (!response.ok) {
         throw {
             message: `Failed to fetch van: ${response.status} ${response.statusText}`,
@@ -29,7 +30,7 @@ function getAuthHeaders() {
 }
 
 export async function getHostVans() {
-    const response = await fetch("/api/host/vans", {
+    const response = await fetch(`${apiUrl}/api/host/vans`, {
         headers: getAuthHeaders()
     });
     if (!response.ok) {
@@ -42,7 +43,7 @@ export async function getHostVans() {
 }
 
 export async function getHostVan(id: string) {
-    const response = await fetch(`/api/host/vans/${id}`, {
+    const response = await fetch(`${apiUrl}/api/host/vans/${id}`, {
         headers: getAuthHeaders()
     });
     if (!response.ok) {
@@ -55,7 +56,7 @@ export async function getHostVan(id: string) {
 }
 
 export async function loginUser(email: string, password: string) {
-    const response = await fetch("/api/login/", {
+    const response = await fetch(`${apiUrl}/api/login/`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -77,7 +78,7 @@ export async function loginUser(email: string, password: string) {
 }
 
 export async function getHostIncome() {
-    const response = await fetch("/api/host/income", {
+    const response = await fetch(`${apiUrl}/api/host/income`, {
         headers: getAuthHeaders()
     });
     if (!response.ok) {
@@ -90,7 +91,7 @@ export async function getHostIncome() {
 }
 
 export async function getHostReviews() {
-    const response = await fetch("/api/host/reviews", {
+    const response = await fetch(`${apiUrl}/api/host/reviews`, {
         headers: getAuthHeaders()
     });
     if (!response.ok) {
