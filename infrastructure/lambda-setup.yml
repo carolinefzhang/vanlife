@@ -1,0 +1,89 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Vanlife API Lambda and API Gateway setup'
+
+Resources:
+  VanlifeApiRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  VanlifeApiFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: vanlife-api
+      Runtime: python3.9
+      Handler: lambda_handler.lambda_handler
+      Role: !GetAtt VanlifeApiRole.Arn
+      Code:
+        ZipFile: |
+          def lambda_handler(event, context):
+              return {'statusCode': 200, 'body': 'Initial deployment'}
+      Timeout: 30
+      MemorySize: 512
+
+  VanlifeApiGateway:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: vanlife-api
+      Description: Vanlife Django API
+
+  VanlifeApiResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      RestApiId: !Ref VanlifeApiGateway
+      ParentId: !GetAtt VanlifeApiGateway.RootResourceId
+      PathPart: '{proxy+}'
+
+  VanlifeApiMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref VanlifeApiGateway
+      ResourceId: !Ref VanlifeApiResource
+      HttpMethod: ANY
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${VanlifeApiFunction.Arn}/invocations'
+
+  VanlifeApiRootMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref VanlifeApiGateway
+      ResourceId: !GetAtt VanlifeApiGateway.RootResourceId
+      HttpMethod: ANY
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${VanlifeApiFunction.Arn}/invocations'
+
+  VanlifeApiDeployment:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn:
+      - VanlifeApiMethod
+      - VanlifeApiRootMethod
+    Properties:
+      RestApiId: !Ref VanlifeApiGateway
+      StageName: prod
+
+  LambdaApiGatewayPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref VanlifeApiFunction
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub '${VanlifeApiGateway}/*/*'
+
+Outputs:
+  ApiUrl:
+    Description: 'API Gateway endpoint URL'
+    Value: !Sub 'https://${VanlifeApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod'

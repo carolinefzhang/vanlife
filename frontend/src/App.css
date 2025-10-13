@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #FFF7ED;
+;
+}
+
+a {
+   @apply text-black hover:underline hover:text-black visited:text-black;
+}
+
+.home-container {
+  background-image: url("./assets/home-background.png");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  padding: 24px;
+  margin: 0;
+  position: relative;
+  top: 0;
+  color: #FFFFFF;
+}
+
+h1 {
+  font-family: Inter;
+  font-weight: 800;
+  font-style: Extra Bold;
+  font-size: 36px;
+  line-height: 42px;
+  letter-spacing: 0%;
+  margin: 30px 0;
+}
+
+.subheading {
+  font-family: Inter;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  margin: 30px 0;
+  text-align: left;
+}
+
+.yellow-button {
+  background: #ff8c38;
+  border-radius: 8px;
+  font-family: Inter;
+  font-weight: 600;
+  font-style: Semi Bold;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border: none;
+}
+
+.yellow-button:disabled {
+  background: #AAAAAA;
+  cursor: not-allowed;
+}
+
+footer {
+  background-color: #252525;
+  color: #AAAAAA;
+}
+
+.feature {
+  background-color: #FFCC8D;
+  padding: 30px;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.dark-button {
+  background: #1a1a1a;
+  border-radius: 8px;
+  font-family: Inter;
+  font-weight: 600;
+  font-style: Semi Bold;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border: none;
+}
+
+.about-image {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 20px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.van-card {
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+
+  border-radius: 8px;
+}
+
+.van-img {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.simple {
+  background-color: #E17654;
+  color: white;
+}
+.rugged {
+  background-color: #115E59;
+  color: white;
+}
+.luxury {
+  background-color: #161616;
+  color: white;
+}
+.filter-button {
+  background: #FFEAD0;
+  color: #161616;
+}
+.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
