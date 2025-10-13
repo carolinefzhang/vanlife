@@ -75,12 +75,7 @@ Resources:
       RestApiId: !Ref VanlifeApiGateway
       StageName: prod
 
-  LambdaApiGatewayPermission:
-    Type: AWS::Lambda::Permission
-    Properties:
-      FunctionName: !Ref VanlifeApiFunction
-      Action: lambda:InvokeFunction
-      Principal: apigateway.amazonaws.com
+
 
 Outputs:
   ApiUrl:
