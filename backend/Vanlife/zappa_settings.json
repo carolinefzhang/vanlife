@@ -2,7 +2,7 @@
     "production": {
         "app_function": "Vanlife.wsgi.application",
         "aws_region": "us-east-1",
-        "profile_name": "default",
+
         "project_name": "vanlife-api",
         "runtime": "python3.11",
         "s3_bucket": "vanlife-zappa-deployments",
