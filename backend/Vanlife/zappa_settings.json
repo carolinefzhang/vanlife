@@ -4,7 +4,7 @@
         "aws_region": "us-east-1",
         "profile_name": "default",
         "project_name": "vanlife-api",
-        "runtime": "python3.13",
+        "runtime": "python3.11",
         "s3_bucket": "vanlife-zappa-deployments",
         "environment_variables": {
             "DJANGO_SETTINGS_MODULE": "Vanlife.settings"
