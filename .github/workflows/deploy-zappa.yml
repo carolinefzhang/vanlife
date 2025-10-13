@@ -18,9 +18,11 @@ jobs:
       with:
         python-version: '3.11'
     
-    - name: Install dependencies
+    - name: Create virtual environment and install dependencies
       run: |
         cd backend/Vanlife
+        python -m venv venv
+        source venv/bin/activate
         pip install -r ../requirements.txt
     
     - name: Configure AWS credentials
@@ -33,6 +35,7 @@ jobs:
     - name: Deploy with Zappa
       run: |
         cd backend/Vanlife
+        source venv/bin/activate
         export DB_NAME=${{ secrets.DB_NAME }}
         export DB_USER=${{ secrets.DB_USER }}
         export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
@@ -43,4 +46,5 @@ jobs:
     - name: Run Django migrations
       run: |
         cd backend/Vanlife
+        source venv/bin/activate
         zappa manage production migrate
