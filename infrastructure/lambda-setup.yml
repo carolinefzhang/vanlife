@@ -19,7 +19,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: vanlife-api
-      Runtime: python3.9
+      Runtime: python3.13
       Handler: lambda_handler.lambda_handler
       Role: !GetAtt VanlifeApiRole.Arn
       Code:
