@@ -81,7 +81,6 @@ Resources:
       FunctionName: !Ref VanlifeApiFunction
       Action: lambda:InvokeFunction
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${VanlifeApiGateway}/*/*'
 
 Outputs:
   ApiUrl:
