@@ -1,0 +1,16 @@
+{
+    "production": {
+        "app_function": "Vanlife.wsgi.application",
+        "aws_region": "us-east-1",
+        "profile_name": "default",
+        "project_name": "vanlife-api",
+        "runtime": "python3.9",
+        "s3_bucket": "vanlife-zappa-deployments",
+        "environment_variables": {
+            "DJANGO_SETTINGS_MODULE": "Vanlife.settings"
+        },
+        "keep_warm": false,
+        "timeout_seconds": 30,
+        "memory_size": 512
+    }
+}
