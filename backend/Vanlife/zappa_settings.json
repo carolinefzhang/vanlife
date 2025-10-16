@@ -6,6 +6,7 @@
         "project_name": "vanlife-api",
         "runtime": "python3.11",
         "s3_bucket": "vanlife-zappa-deployments",
+        "django_settings": "Vanlife.settings",
         "environment_variables": {
             "DJANGO_SETTINGS_MODULE": "Vanlife.settings"
         },
