@@ -36,12 +36,15 @@ jobs:
       run: |
         cd backend/Vanlife
         source venv/bin/activate
-        export DB_NAME=${{ secrets.DB_NAME }}
-        export DB_USER=${{ secrets.DB_USER }}
-        export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-        export DB_HOST=${{ secrets.DB_HOST }}
-        export DB_PORT=${{ secrets.DB_PORT }}
+        # Substitute environment variables in zappa_settings.json
+        envsubst < zappa_settings.json > zappa_settings_temp.json && mv zappa_settings_temp.json zappa_settings.json
         zappa update production || zappa deploy production
+      env:
+        DB_NAME: ${{ secrets.DB_NAME }}
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_PORT: ${{ secrets.DB_PORT }}
     
     - name: Run Django migrations
       run: |
