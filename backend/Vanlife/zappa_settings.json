@@ -9,12 +9,11 @@
         "django_settings": "Vanlife.settings",
         "environment_variables": {
             "DJANGO_SETTINGS_MODULE": "Vanlife.settings",
-            "DB_NAME": "${DB_NAME}",
-            "DB_USER": "${DB_USER}",
-            "DB_PASSWORD": "${DB_PASSWORD}",
             "DB_HOST": "${DB_HOST}",
-            "DB_PORT": "${DB_PORT}"
+            "DB_USER": "${DB_USER}",
+            "DB_PASSWORD": "${DB_PASSWORD}"         
         },
+
         "keep_warm": false,
         "timeout_seconds": 30,
         "memory_size": 512
