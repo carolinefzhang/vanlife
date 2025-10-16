@@ -53,4 +53,4 @@ jobs:
       run: |
         cd backend/Vanlife
         source venv/bin/activate
-        echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', ${{ secrets.ADMIN_EMAIL }}, ${{ secrets.ADMIN_PASSWORD }}) if not User.objects.filter(username='admin').exists() else None" | zappa manage production shell
+        echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', '${{ secrets.ADMIN_EMAIL }}', '${{ secrets.ADMIN_PASSWORD }}') if not User.objects.filter(username='admin').exists() else print('Admin user already exists')" | zappa manage production shell
